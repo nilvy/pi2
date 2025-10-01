@@ -1,6 +1,8 @@
 <h2>Tela de Login</h2>
 <form method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Entrar</button>
-  <p><a href="{% url 'password_reset' %}">Esqueceu sua senha?</a></p>
+  <form method="post">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit">Entrar</button>
+    <p><a href="{% url 'password_reset' %}">Esqueceu sua senha?</a></p>
+  </form>
 </form>
