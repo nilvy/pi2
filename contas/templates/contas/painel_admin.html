@@ -1,0 +1,8 @@
+<h2>Painel Administrativo</h2>
+<p>Bem-vindo, {{ user.username }}!</p>
+
+<ul>
+  <li><a href="{% url 'logout' %}">Sair</a></li>
+  <li><a href="/admin/">Ir para o painel Django</a></li>
+  <li><a href="/produtos/">Ver produtos</a></li>
+</ul>

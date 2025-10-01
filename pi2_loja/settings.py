@@ -9,6 +9,14 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+from pathlib import Path
+import os
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 from pathlib import Path
 
@@ -37,8 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'produtos',
+    'contas',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -68,6 +77,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pi2_loja.wsgi.application'
 
+LOGIN_URL = '/contas/login/'
+LOGIN_REDIRECT_URL = '/painel/'
+LOGOUT_REDIRECT_URL = '/contas/login/'
+
+LOGIN_REDIRECT_URL = '/contas/painel/'
+LOGOUT_REDIRECT_URL = '/contas/login/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
+#EMAIL_HOST_USER = 'seuemail@gmail.com'
+#EMAIL_HOST_PASSWORD = 'sua_senha_de_aplicativo'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
