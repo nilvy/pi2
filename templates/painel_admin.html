@@ -1,8 +1,12 @@
 <h2>Painel Administrativo</h2>
 <p>Bem-vindo, {{ user.username }}!</p>
 
-<ul>
-  <li><a href="{% url 'logout' %}">Sair</a></li>
+
+ <ul>
   <li><a href="/admin/">Ir para o painel Django</a></li>
   <li><a href="/produtos/">Ver produtos</a></li>
+  <li><a href="{% url 'home' %}"> Ver Home Page</a></li>
+    <form method="post" action="{% url 'logout' %}">
+  {% csrf_token %}
+  <button type="submit">Sair</button>
 </ul>
