@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ produto.nome }}</title>
+    <link rel="stylesheet" href="{% static 'css/produtos.css' %}" />
+    <style>
+      .detalhes-container {
+        max-width: 1000px;
+        margin: 40px auto;
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        padding: 0 20px;
+      }
+
+      .detalhes-imagem {
+        flex: 1;
+      }
+
+      .detalhes-imagem img {
+        width: 100%;
+        border-radius: 8px;
+        border: 2px solid #ccc;
+      }
+
+      .detalhes-info {
+        flex: 2;
+      }
+
+      .detalhes-info h2 {
+        margin-top: 0;
+      }
+
+      .whatsapp-button {
+        margin-top: 20px;
+      }
+
+      .whatsapp-button button {
+        background-color: #25d366;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .whatsapp-button button:hover {
+        background-color: #1da851;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="detalhes-container">
+      <div class="detalhes-imagem">
+        {% if produto.imagem %}
+        <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" />
+        {% endif %}
+      </div>
+      <div class="detalhes-info">
+        <h2>{{ produto.nome }}</h2>
+        <p><strong>Categoria:</strong> {{ produto.categoria.nome }}</p>
+        <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
+        <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
+
+        <div class="whatsapp-button">
+          <a
+            href="https://wa.me/55SEUNUMERO?text=Olá, quero comprar o produto {{ produto.nome }}"
+            target="_blank"
+          >
+            <button>Comprar pelo WhatsApp</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

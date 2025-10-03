@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Produto
+from .models import Produto, Categoria
 
-@admin.register(Produto)
 class ProdutoAdmin(admin.ModelAdmin):
-    list_display = ['nome', 'preco', 'estoque']
-    search_fields = ['nome']
+    list_display = ['nome', 'categoria', 'status']
+
+admin.site.register(Produto, ProdutoAdmin)
+admin.site.register(Categoria)

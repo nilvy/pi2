@@ -1,0 +1,64 @@
+{% load static %} {% load custom_tags %}
+<link rel="stylesheet" href="{% static 'css/produtos.css' %}" />
+<h2 style="text-align: center">Gestão de Categorias</h2>
+
+<table style="width: 100%; border-collapse: collapse">
+  <tr>
+    <th style="text-align: left">Categoria</th>
+    <th style="text-align: left">Subcategorias</th>
+    <th style="text-align: left">Ações</th>
+  </tr>
+  {% for cat in categorias %}
+  <tr>
+    <td>{{ cat.nome }}</td>
+    <td>
+      {% if subcategorias_por_categoria|get_item:cat.id %}
+      <ul>
+        {% for sub in subcategorias_por_categoria|get_item:cat.id %}
+        <li>
+          {{ sub.nome }}
+          <a href="{% url 'editar_subcategoria' sub.id %}">Editar</a> |
+          <form
+            method="post"
+            action="{% url 'excluir_subcategoria' sub.id %}"
+            style="display: inline"
+          >
+            {% csrf_token %}
+            <button type="submit">Excluir</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <em>Sem subcategorias</em>
+      {% endif %}
+    </td>
+    <td>
+      <a href="{% url 'editar_categoria' cat.id %}">Editar</a> |
+      <form
+        method="post"
+        action="{% url 'excluir_categoria' cat.id %}"
+        style="display: inline"
+      >
+        {% csrf_token %}
+        <button type="submit">Excluir</button>
+      </form>
+      |
+      <a href="{% url 'adicionar_subcategoria' %}?categoria_id={{ cat.id }}"
+        >+ Subcategoria</a
+      >
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<a href="{% url 'adicionar_categoria' %}">+ Adicionar Categoria</a>
+
+<div class="botoes-navegacao">
+  <a href="javascript:history.back()">
+    <button class="botao-voltar">← Voltar</button>
+  </a>
+  <a href="{% url 'painel_admin' %}">
+    <button class="botao-painel">🏠 Painel de Controle</button>
+  </a>
+</div>

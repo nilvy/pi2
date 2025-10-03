@@ -1,4 +1,34 @@
-<h2>Lista de Produtos</h2>
-{% for produto in produtos %}
-<p>{{ produto.nome }} - R$ {{ produto.preco }}</p>
-{% endfor %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/produtos.css' %}" />
+<h2 style="text-align: center">Lista de Produtos</h2>
+<div class="grid-produtos">
+  {% for produto in produtos %}
+  <div class="produto-box">
+    {% if produto.imagem %}
+    <img
+      src="{{ produto.imagem.url }}"
+      alt="{{ produto.nome }}"
+      class="produto-imagem"
+    />
+    {% endif %}
+    <h3>{{ produto.nome }}</h3>
+    <p>R$ {{ produto.preco|floatformat:2 }}</p>
+    <a href="{% url 'detalhes_produto' produto.id %}"
+      >Clique aqui para saber mais</a
+    >
+  </div>
+  {% endfor %}
+</div>
+<div class="paginacao" style="text-align: center; margin-top: 40px">
+  {% if page_obj.has_previous %}
+  <a href="?page={{ page_obj.previous_page_number }}">&laquo; Anterior</a>
+  {% endif %}
+
+  <span
+    >Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span
+  >
+
+  {% if page_obj.has_next %}
+  <a href="?page={{ page_obj.next_page_number }}">Próxima &raquo;</a>
+  {% endif %}
+</div>

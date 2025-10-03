@@ -1,0 +1,24 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/produtos.css' %}" />
+
+<div class="form-container">
+  <h2>Adicione um produto</h2>
+
+  <a href="{% url 'gestao_produtos' %}" class="voltar"
+    >← Produtos Cadastrados</a
+  >
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit">Enviar</button>
+  </form>
+
+  <div class="botoes-navegacao">
+    <a href="javascript:history.back()">
+      <button>← Voltar</button>
+    </a>
+    <a href="{% url 'painel_admin' %}">
+      <button>🏠 Painel de Controle</button>
+    </a>
+  </div>
+</div>
